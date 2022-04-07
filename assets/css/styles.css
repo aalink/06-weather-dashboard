@@ -1,0 +1,14 @@
+main {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.search-btn-text {
+    color: white;
+}
+
+.column-section {
+    display: flex;
+    flex-direction: column;
+}
