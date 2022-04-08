@@ -29,20 +29,20 @@ function getCityWeather(cityName) {
     // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
     .then(function (data) {
       console.log(data);
-      var lat = data.coord.lat;
-      var lon = data.coord.lon;
-      // console.log("Lat: " + lat + " Lon: " + lon)
-      var latString = lat.toString()
-      var lonString = lon.toString()
+      useThisLat += data.coord.lat;
+      useThisLon += data.coord.lon;
+      console.log("############## Lat: " + useThisLat + " Lon: " + useThisLon + " ##############")
       currentCity.textContent = cityName.toUpperCase();
       currentTemperature.textContent = "Temperature: " + data.main.temp;
-      currentTimezone.textContent = "Time: " + data.timezone;
+      // currentTimezone.textContent = "Time: " + data.timezone;
       // currentUVIndex.textContent = "UV Index: " +
       currentHumidity.textContent = "Humidity: " + data.main.humidity;
       currentWindSpeed.textContent = "Wind Speed: " + data.wind.speed;
+      getUVIndex(useThisLat, useThisLon);
+
     });
 }
-getCityWeather("cupertino");
+getCityWeather("atlanta");
 // var lat = cityData.coord.lat;
 // var lon = cityData.coord.lon;
 // console.log(cityData.coord.lat)
@@ -62,6 +62,10 @@ function getUVIndex(lat, lon) {
     })
     .then(function (data) {
       console.log(data);
+      currentUVIndex.textContent = "UV Index: " + data.current.uvi
     });
 }
-getUVIndex(37.323, -122.0322);
+// getUVIndex(33.749, -84.388);
+
+// console.log(useThisLat)
+// console.log(useThisLon)
