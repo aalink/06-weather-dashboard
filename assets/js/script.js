@@ -6,7 +6,6 @@ var currentTimezone = document.querySelector("#timezone");
 var currentUVIndex = document.querySelector("#uvIndex");
 var currentWindSpeed = document.querySelector("#windSpeed");
 var currentHumidity = document.querySelector("#humidity");
-var cityData = "";
 
 // Display a live clock that includes the date.
 window.setInterval(function () {
@@ -22,6 +21,7 @@ function getCityWeather(cityName) {
     "&units=imperial";
   // console.log(weatherByCityURL);
 
+
   fetch(weatherByCityURL)
     .then(function (response) {
       return response.json();
@@ -29,14 +29,39 @@ function getCityWeather(cityName) {
     // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
     .then(function (data) {
       console.log(data);
-      cityData = data;
+      var lat = data.coord.lat;
+      var lon = data.coord.lon;
+      // console.log("Lat: " + lat + " Lon: " + lon)
+      var latString = lat.toString()
+      var lonString = lon.toString()
       currentCity.textContent = cityName.toUpperCase();
-      currentTemperature.textContent = "Temperature: " + cityData.main.temp;
-      currentTimezone.textContent = "Time: " + cityData.timezone;
+      currentTemperature.textContent = "Temperature: " + data.main.temp;
+      currentTimezone.textContent = "Time: " + data.timezone;
       // currentUVIndex.textContent = "UV Index: " +
-      currentHumidity.textContent = "Humidity: " + cityData.main.humidity;
-      currentWindSpeed.textContent = "Wind Speed: " + cityData.wind.speed;
+      currentHumidity.textContent = "Humidity: " + data.main.humidity;
+      currentWindSpeed.textContent = "Wind Speed: " + data.wind.speed;
     });
 }
+getCityWeather("cupertino");
+// var lat = cityData.coord.lat;
+// var lon = cityData.coord.lon;
+// console.log(cityData.coord.lat)
+// console.log(lon)
 
-var alpharetta = getCityWeather("cupertino");
+function getUVIndex(lat, lon) {
+  var getUV =
+    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+    lat.toString() +
+    "&lon=" +
+    lon.toString() +
+    "&exclude=hourly,daily&appid=" +
+    openWeatherAPIKey;
+  fetch(getUV)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
+}
+getUVIndex(37.323, -122.0322);
