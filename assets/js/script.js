@@ -6,6 +6,7 @@ var currentTimezone = document.querySelector("#timezone");
 var currentUVIndex = document.querySelector("#uvIndex");
 var currentWindSpeed = document.querySelector("#windSpeed");
 var currentHumidity = document.querySelector("#humidity");
+var searchButton = document.querySelector("#searchButton");
 
 // Display a live clock that includes the date.
 window.setInterval(function () {
@@ -13,40 +14,36 @@ window.setInterval(function () {
 }, 1000);
 
 function getCityWeather(cityName) {
+  var inputCityName = document.querySelector("#inputCityName").value;
+  if (!inputCityName) {
+    console.error("Nothing was entered. Please type the name of a city.");
+    return;
+  }
+  cityName = inputCityName;
   var weatherByCityURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     cityName +
     "&appid=" +
     openWeatherAPIKey +
     "&units=imperial";
-  // console.log(weatherByCityURL);
-
 
   fetch(weatherByCityURL)
     .then(function (response) {
       return response.json();
     })
-    // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
     .then(function (data) {
       console.log(data);
-      useThisLat += data.coord.lat;
-      useThisLon += data.coord.lon;
-      console.log("############## Lat: " + useThisLat + " Lon: " + useThisLon + " ##############")
+      useThisLat = data.coord.lat;
+      useThisLon = data.coord.lon;
       currentCity.textContent = cityName.toUpperCase();
-      currentTemperature.textContent = "Temperature: " + data.main.temp;
+      currentTemperature.textContent = "Temperature: " + data.main.temp + " °F";
       // currentTimezone.textContent = "Time: " + data.timezone;
       // currentUVIndex.textContent = "UV Index: " +
       currentHumidity.textContent = "Humidity: " + data.main.humidity;
-      currentWindSpeed.textContent = "Wind Speed: " + data.wind.speed;
+      currentWindSpeed.textContent = "Wind Speed: " + data.wind.speed + " mph";
       getUVIndex(useThisLat, useThisLon);
-
     });
 }
-getCityWeather("atlanta");
-// var lat = cityData.coord.lat;
-// var lon = cityData.coord.lon;
-// console.log(cityData.coord.lat)
-// console.log(lon)
 
 function getUVIndex(lat, lon) {
   var getUV =
@@ -62,10 +59,7 @@ function getUVIndex(lat, lon) {
     })
     .then(function (data) {
       console.log(data);
-      currentUVIndex.textContent = "UV Index: " + data.current.uvi
+      currentUVIndex.textContent = "UV Index: " + data.current.uvi;
     });
 }
-// getUVIndex(33.749, -84.388);
-
-// console.log(useThisLat)
-// console.log(useThisLon)
+searchButton.addEventListener("click", getCityWeather);
