@@ -7,6 +7,8 @@ var currentUVIndex = document.querySelector("#uvIndex");
 var currentWindSpeed = document.querySelector("#windSpeed");
 var currentHumidity = document.querySelector("#humidity");
 var searchButton = document.querySelector("#searchButton");
+var inputCityName = document.querySelector("#inputCityName").value;
+var weatherIcon = document.querySelector("#weatherIcon")
 
 // Display a live clock that includes the date.
 window.setInterval(function () {
@@ -37,14 +39,15 @@ function getCityWeather(cityName) {
       useThisLon = data.coord.lon;
       currentCity.textContent = cityName.toUpperCase();
       currentTemperature.textContent = "Temperature: " + data.main.temp + " °F";
+      weatherIcon.src = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
       // currentTimezone.textContent = "Time: " + data.timezone;
       // currentUVIndex.textContent = "UV Index: " +
       currentHumidity.textContent = "Humidity: " + data.main.humidity;
       currentWindSpeed.textContent = "Wind Speed: " + data.wind.speed + " mph";
       getUVIndex(useThisLat, useThisLon);
+      getFiveDayForeCast(useThisLat, useThisLon);
     });
 }
-
 function getUVIndex(lat, lon) {
   var getUV =
     "https://api.openweathermap.org/data/2.5/onecall?lat=" +
@@ -62,4 +65,22 @@ function getUVIndex(lat, lon) {
       currentUVIndex.textContent = "UV Index: " + data.current.uvi;
     });
 }
+
+function getFiveDayForeCast(lat, lon) {
+  var fiveDayForecast =
+  "https://api.openweathermap.org/data/2.5/forecast?lat=" +
+  lat.toString() +
+  "&lon=" +
+  lon.toString() +
+  "&appid=" +
+  openWeatherAPIKey;
+  fetch(fiveDayForecast)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+  });
+}
+
 searchButton.addEventListener("click", getCityWeather);
