@@ -8,7 +8,7 @@ var currentWindSpeed = document.querySelector("#windSpeed");
 var currentHumidity = document.querySelector("#humidity");
 var searchButton = document.querySelector("#searchButton");
 var inputCityName = document.querySelector("#inputCityName").value;
-var weatherIcon = document.querySelector("#weatherIcon")
+var weatherIcon = document.querySelector("#weatherIcon");
 
 // Display a live clock that includes the date.
 window.setInterval(function () {
@@ -39,7 +39,8 @@ function getCityWeather(cityName) {
       useThisLon = data.coord.lon;
       currentCity.textContent = cityName.toUpperCase();
       currentTemperature.textContent = "Temperature: " + data.main.temp + " °F";
-      weatherIcon.src = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+      weatherIcon.src =
+        "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
       // currentTimezone.textContent = "Time: " + data.timezone;
       // currentUVIndex.textContent = "UV Index: " +
       currentHumidity.textContent = "Humidity: " + data.main.humidity;
@@ -68,19 +69,56 @@ function getUVIndex(lat, lon) {
 
 function getFiveDayForeCast(lat, lon) {
   var fiveDayForecast =
-  "https://api.openweathermap.org/data/2.5/forecast?lat=" +
-  lat.toString() +
-  "&lon=" +
-  lon.toString() +
-  "&appid=" +
-  openWeatherAPIKey;
+    "https://api.openweathermap.org/data/2.5/forecast?lat=" +
+    lat.toString() +
+    "&lon=" +
+    lon.toString() +
+    "&appid=" +
+    openWeatherAPIKey +
+    "&units=imperial";
   fetch(fiveDayForecast)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-  });
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
 }
 
 searchButton.addEventListener("click", getCityWeather);
+
+for (let i = 0; i < 5; i++) {
+  var fiveDaySection = document.querySelector("#fiveDaySection");
+  var createDay = document.createElement("div");
+  createDay.setAttribute("id", "day" + i);
+  createDay.classList.add("day-class");
+  fiveDaySection.append(createDay);
+
+  var selectDay = document.querySelector("#day" + i);
+  var addImageElement = document.createElement("img");
+  var addDateElement = document.createElement("p");
+  var addTemperatureElement = document.createElement("p");
+  var addWindSpeedElement = document.createElement("p");
+  var addHumidityElement = document.createElement("p");
+
+  // Create Date
+  addDateElement.setAttribute("id", "date-" + i);
+  selectDay.append(addDateElement);
+  addDateElement.textContent = "Date: ";
+  // Create icon representation
+  addImageElement.setAttribute("id", "weather-icon-" + i);
+  addImageElement.setAttribute("src", "/assets/images/winter-weather.jpg");
+  selectDay.append(addImageElement);
+  // Create temperature
+  addTemperatureElement.setAttribute("id", "temperature-" + i);
+  selectDay.append(addTemperatureElement);
+  addTemperatureElement.textContent = "Temperature: ";
+  // Create wind speed
+  addWindSpeedElement.setAttribute("id", "windSpeed-" + i);
+  selectDay.append(addWindSpeedElement);
+  addWindSpeedElement.textContent = "Wind Speed: ";
+  // Create humidity
+  addHumidityElement.setAttribute("id", "humidity-" + i);
+  selectDay.append(addHumidityElement);
+  addHumidityElement.textContent = "Humidity: ";
+}
