@@ -26,16 +26,21 @@
     <main>
       <aside class="col-2">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search" aria-label="search" aria-describedby="basic-addon2">
+            <input id="inputCityName" type="text" class="form-control" placeholder="Search" aria-label="search" aria-describedby="basic-addon2">
             <div class="input-group-append">
-              <button class="btn btn-outline-white bg-primary search-btn-text" type="button">Go</button>
+              <button id="searchButton" class="btn btn-outline-white bg-primary search-btn-text" type="button">Go</button>
             </div>
           </div>
       </aside>
       <section class="col-10">
-        <section class="border border-dark border border-5">
-          <h2>Current City</h2>
-          <div id="live-clock"></div>
+        <section class="border-bottom border-dark border-5">
+          <h2 id="current-city" class="mx-auto">Current City</h2>
+          <h4 id="todaysDate"></h4>
+          <h4 id="temperature"></h4>
+          <h4 id="timezone"></h4>
+          <h4 id="humidity"></h4>
+          <h4 id="uvIndex"></h4>
+          <h4 id="windSpeed"></h4>
         </section>
         <section>
           <h2>5 Day Forecast</h2>
