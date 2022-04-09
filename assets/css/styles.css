@@ -12,3 +12,16 @@ main {
     display: flex;
     flex-direction: column;
 }
+
+.row-section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.day-class {
+    padding: 20px;
+    margin: 5px;
+    border-color: black;
+    border-style:solid  
+}
