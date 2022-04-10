@@ -96,7 +96,9 @@ function getFiveDayForeCast(lat, lon) {
       // console.log(fiveDay.list[19].dt_txt)
       // console.log(fiveDay.list[27].dt_txt)
       // console.log(fiveDay.list[35].dt_txt)
-      document.getElementById("date-0").textContent = fiveDay.list[3].dt_txt;
+
+      var date0 = fiveDay.list[3].dt_txt;
+      document.getElementById("date-0").textContent = date0.substring(0, 10);
       document.getElementById("temperature-0").textContent =
         "Temperature: " + fiveDay.list[3].main.temp + " °F";
       document.getElementById("windSpeed-0").textContent =
@@ -108,7 +110,8 @@ function getFiveDayForeCast(lat, lon) {
         fiveDay.list[3].weather[0].icon +
         ".png";
 
-      document.getElementById("date-1").textContent = fiveDay.list[11].dt_txt;
+      var date1 = fiveDay.list[11].dt_txt;
+      document.getElementById("date-1").textContent = date1.substring(0, 10);
       document.getElementById("temperature-1").textContent =
         "Temperature: " + fiveDay.list[11].main.temp + " °F";
       document.getElementById("windSpeed-1").textContent =
@@ -120,7 +123,8 @@ function getFiveDayForeCast(lat, lon) {
         fiveDay.list[11].weather[0].icon +
         ".png";
 
-      document.getElementById("date-2").textContent = fiveDay.list[19].dt_txt;
+      var date2 = fiveDay.list[19].dt_txt;
+      document.getElementById("date-2").textContent = date2.substring(0, 10);
       document.getElementById("temperature-2").textContent =
         "Temperature: " + fiveDay.list[19].main.temp + " °F";
       document.getElementById("windSpeed-2").textContent =
@@ -132,7 +136,8 @@ function getFiveDayForeCast(lat, lon) {
         fiveDay.list[19].weather[0].icon +
         ".png";
 
-      document.getElementById("date-3").textContent = fiveDay.list[27].dt_txt;
+      var date3 = fiveDay.list[27].dt_txt;
+      document.getElementById("date-3").textContent = date3.substring(0, 10);
       document.getElementById("temperature-3").textContent =
         "Temperature: " + fiveDay.list[27].main.temp + " °F";
       document.getElementById("windSpeed-3").textContent =
@@ -144,7 +149,8 @@ function getFiveDayForeCast(lat, lon) {
         fiveDay.list[27].weather[0].icon +
         ".png";
 
-      document.getElementById("date-4").textContent = fiveDay.list[35].dt_txt;
+      var date4 = fiveDay.list[35].dt_txt;
+      document.getElementById("date-4").textContent = date4.substring(0, 10);
       document.getElementById("temperature-4").textContent =
         "Temperature: " + fiveDay.list[35].main.temp + " °F";
       document.getElementById("windSpeed-4").textContent =
