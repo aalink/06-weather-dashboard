@@ -23,5 +23,11 @@ main {
     padding: 20px;
     margin: 5px;
     border-color: black;
-    border-style:solid  
+    border-style:solid;
+    background-color: grey;
+}
+
+p {
+    color: white;
+    font-weight: bold;
 }
