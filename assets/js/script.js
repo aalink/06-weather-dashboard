@@ -62,7 +62,7 @@ function getUVIndex(lat, lon) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+      // console.log(data);
       currentUVIndex.textContent = "UV Index: " + data.current.uvi;
     });
 }
@@ -82,6 +82,50 @@ function getFiveDayForeCast(lat, lon) {
     })
     .then(function (data) {
       console.log(data);
+      fiveDay = data;
+      // console.log(fiveDay)
+      // console.log(fiveDay.list[3].dt_txt)
+      // console.log(fiveDay.list[11].dt_txt)
+      // console.log(fiveDay.list[19].dt_txt)
+      // console.log(fiveDay.list[27].dt_txt)
+      // console.log(fiveDay.list[35].dt_txt)
+      document.getElementById("date-0").textContent = fiveDay.list[3].dt_txt
+      document.getElementById("temperature-0").textContent = "Temperature: " + fiveDay.list[3].main.temp + " °F"
+      document.getElementById("windSpeed-0").textContent = "Wind Speed: " + fiveDay.list[3].wind.speed + " mph"
+      document.getElementById("humidity-0").textContent = "Humidity: " + fiveDay.list[3].main.humidity
+      document.getElementById("weather-icon-0").src = "https://openweathermap.org/img/w/" + fiveDay.list[3].weather[0].icon + ".png";
+      
+      
+      document.getElementById("date-1").textContent = fiveDay.list[11].dt_txt
+      document.getElementById("temperature-1").textContent = "Temperature: " + fiveDay.list[11].main.temp + " °F"
+      document.getElementById("windSpeed-1").textContent = "Wind Speed: " + fiveDay.list[11].wind.speed + " mph"
+      document.getElementById("humidity-1").textContent = "Humidity: " + fiveDay.list[11].main.humidity
+      document.getElementById("weather-icon-1").src = "https://openweathermap.org/img/w/" + fiveDay.list[11].weather[0].icon + ".png";
+
+      document.getElementById("date-2").textContent = fiveDay.list[19].dt_txt
+      document.getElementById("temperature-2").textContent = "Temperature: " + fiveDay.list[19].main.temp + " °F"
+      document.getElementById("windSpeed-2").textContent = "Wind Speed: " + fiveDay.list[19].wind.speed + " mph"
+      document.getElementById("humidity-2").textContent = "Humidity: " + fiveDay.list[19].main.humidity
+      document.getElementById("weather-icon-2").src = "https://openweathermap.org/img/w/" + fiveDay.list[19].weather[0].icon + ".png";
+
+      document.getElementById("date-3").textContent = fiveDay.list[27].dt_txt
+      document.getElementById("temperature-3").textContent = "Temperature: " + fiveDay.list[27].main.temp + " °F"
+      document.getElementById("windSpeed-3").textContent = "Wind Speed: " + fiveDay.list[27].wind.speed + " mph"
+      document.getElementById("humidity-3").textContent = "Humidity: " + fiveDay.list[27].main.humidity
+      document.getElementById("weather-icon-3").src = "https://openweathermap.org/img/w/" + fiveDay.list[27].weather[0].icon + ".png";
+
+      document.getElementById("date-4").textContent = fiveDay.list[35].dt_txt
+      document.getElementById("temperature-4").textContent = "Temperature: " + fiveDay.list[35].main.temp + " °F"
+      document.getElementById("windSpeed-4").textContent = "Wind Speed: " + fiveDay.list[35].wind.speed + " mph"
+      document.getElementById("humidity-4").textContent = "Humidity: " + fiveDay.list[35].main.humidity
+      document.getElementById("weather-icon-4").src = "https://openweathermap.org/img/w/" + fiveDay.list[35].weather[0].icon + ".png";
+
+      
+
+      
+      
+      
+
     });
 }
 
@@ -107,7 +151,7 @@ for (let i = 0; i < 5; i++) {
   addDateElement.textContent = "Date: ";
   // Create icon representation
   addImageElement.setAttribute("id", "weather-icon-" + i);
-  addImageElement.setAttribute("src", "/assets/images/winter-weather.jpg");
+  addImageElement.setAttribute("src", "");
   selectDay.append(addImageElement);
   // Create temperature
   addTemperatureElement.setAttribute("id", "temperature-" + i);
