@@ -3,6 +3,10 @@ main {
     flex-direction: row;
 }
 
+p {
+    color: white;
+    font-weight: bold;
+}
 
 .search-btn-text {
     color: white;
@@ -27,7 +31,6 @@ main {
     background-color: grey;
 }
 
-p {
-    color: white;
-    font-weight: bold;
+.margin {
+    margin: 10px;
 }
