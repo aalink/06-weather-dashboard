@@ -26,11 +26,10 @@
     <main>
       <aside class="col-2 margin">
         <div class="input-group mb-3">
-            <input id="inputCityName" type="text" class="form-control" placeholder="Search" aria-label="search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button id="searchButton" class="btn btn-outline-white bg-primary search-btn-text" type="button">Go</button>
-            </div>
-          </div>
+            <form id="searchForm">
+              <input id="inputCityName" type="text" placeholder="Enter city name here"class="col-12 form-control"/>
+              <button id="searchButton" class="btn btn-primary col-12">Search</button>
+            </form>
           <div id="savedSearches"></div>
       </aside>
       <section class="col-10 margin">
