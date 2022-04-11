@@ -18,6 +18,40 @@ window.setInterval(function () {
   $("#todaysDate").html(moment().format("dddd MM/DD/YYYY"));
 }, 1000);
 
+function getUVIndex(lat, lon) {
+  var getUV =
+    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+    lat.toString() +
+    "&lon=" +
+    lon.toString() +
+    "&exclude=hourly,daily&appid=" +
+    openWeatherAPIKey;
+  fetch(getUV)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      uvIndex = data.current.uvi;
+      currentUVIndex.removeAttribute("class");
+      if (uvIndex < 3) {
+        currentUVIndex.classList.add("uvIndexLow");
+        currentUVIndex.textContent = "UV Index: " + uvIndex + " : Favorable";
+      }
+      if (uvIndex >= 3 && uvIndex < 7) {
+        currentUVIndex.classList.add("uvIndexMid");
+      currentUVIndex.textContent = "UV Index: " + uvIndex + " : Moderate";
+      }
+      if (uvIndex >= 7){
+        currentUVIndex.classList.add("uvIndexHigh");
+      currentUVIndex.textContent = "UV Index: " + uvIndex + " : Severe";
+      }
+      console.log(uvIndex)
+      return uvIndex;
+    });
+}
+
+
 function getCityWeather(cityName) {
   var inputCityName = document.querySelector("#inputCityName").value;
   if (!citySearches.includes(inputCityName)) {
@@ -52,25 +86,9 @@ function getCityWeather(cityName) {
       // currentUVIndex.textContent = "UV Index: " +
       currentHumidity.textContent = "Humidity: " + data.main.humidity;
       currentWindSpeed.textContent = "Wind Speed: " + data.wind.speed + " mph";
-      getUVIndex(useThisLat, useThisLon);
+      var testThis = getUVIndex(useThisLat, useThisLon);
+      console.log(testThis)
       getFiveDayForeCast(useThisLat, useThisLon);
-    });
-}
-function getUVIndex(lat, lon) {
-  var getUV =
-    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-    lat.toString() +
-    "&lon=" +
-    lon.toString() +
-    "&exclude=hourly,daily&appid=" +
-    openWeatherAPIKey;
-  fetch(getUV)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      // console.log(data);
-      currentUVIndex.textContent = "UV Index: " + data.current.uvi;
     });
 }
 
