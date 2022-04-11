@@ -34,3 +34,13 @@ p {
 .margin {
     margin: 10px;
 }
+
+.uvIndexLow {
+    background-color: rgb(0, 255, 0);
+}
+.uvIndexMid {
+    background-color: yellow;
+}
+.uvIndexHigh {
+    background-color: red;
+}
