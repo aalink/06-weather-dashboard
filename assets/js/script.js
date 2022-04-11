@@ -1,15 +1,16 @@
 // API Key
 const openWeatherAPIKey = "94f49d8b47b3e38bb49ca3e513df1828";
-// var inputCityName = document.querySelector("#inputCityName").value;
 var currentCity = document.querySelector("#current-city");
 var currentTemperature = document.querySelector("#temperature");
 var currentTimezone = document.querySelector("#timezone");
 var currentUVIndex = document.querySelector("#uvIndex");
 var currentWindSpeed = document.querySelector("#windSpeed");
 var currentHumidity = document.querySelector("#humidity");
-var searchButton = document.querySelector("#searchButton");
 var weatherIcon = document.querySelector("#weatherIcon");
 var savedSearches = document.querySelector("#savedSearches");
+var searchButton = document.querySelector("#searchButton");
+var searchForm = document.querySelector("#searchForm");
+// var inputCityName = document.querySelector("#inputCityName");
 
 var citySearches = [];
 
@@ -18,6 +19,7 @@ window.setInterval(function () {
   $("#todaysDate").html(moment().format("dddd MM/DD/YYYY"));
 }, 1000);
 
+// Get the UV Index
 function getUVIndex(lat, lon) {
   var getUV =
     "https://api.openweathermap.org/data/2.5/onecall?lat=" +
@@ -40,18 +42,18 @@ function getUVIndex(lat, lon) {
       }
       if (uvIndex >= 3 && uvIndex < 7) {
         currentUVIndex.classList.add("uvIndexMid");
-      currentUVIndex.textContent = "UV Index: " + uvIndex + " : Moderate";
+        currentUVIndex.textContent = "UV Index: " + uvIndex + " : Moderate";
       }
-      if (uvIndex >= 7){
+      if (uvIndex >= 7) {
         currentUVIndex.classList.add("uvIndexHigh");
-      currentUVIndex.textContent = "UV Index: " + uvIndex + " : Severe";
+        currentUVIndex.textContent = "UV Index: " + uvIndex + " : Severe";
       }
-      console.log(uvIndex)
+      console.log(uvIndex);
       return uvIndex;
     });
 }
 
-
+// Get the current weather for the requested city
 function getCityWeather(cityName) {
   var inputCityName = document.querySelector("#inputCityName").value;
   if (!citySearches.includes(inputCityName)) {
@@ -86,12 +88,11 @@ function getCityWeather(cityName) {
       // currentUVIndex.textContent = "UV Index: " +
       currentHumidity.textContent = "Humidity: " + data.main.humidity;
       currentWindSpeed.textContent = "Wind Speed: " + data.wind.speed + " mph";
-      var testThis = getUVIndex(useThisLat, useThisLon);
-      console.log(testThis)
       getFiveDayForeCast(useThisLat, useThisLon);
     });
 }
 
+// Get the five day forecast for the requested city
 function getFiveDayForeCast(lat, lon) {
   var fiveDayForecast =
     "https://api.openweathermap.org/data/2.5/forecast?lat=" +
@@ -181,8 +182,7 @@ function getFiveDayForeCast(lat, lon) {
         ".png";
     });
 }
-
-searchButton.addEventListener("click", getCityWeather);
+formSubmit();
 
 for (let i = 0; i < 5; i++) {
   var fiveDaySection = document.querySelector("#fiveDaySection");
@@ -219,3 +219,18 @@ for (let i = 0; i < 5; i++) {
   selectDay.append(addHumidityElement);
   addHumidityElement.textContent = "Humidity: ";
 }
+
+function formSubmit(evt) {
+  // evt.preventDefault()
+  var city = inputCityName.value;
+  getCityWeather(city);
+}
+
+function addEventListeners() {
+  searchForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    formSubmit();
+  });
+}
+
+addEventListeners();
