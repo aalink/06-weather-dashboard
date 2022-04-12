@@ -10,7 +10,7 @@ var weatherIcon = document.querySelector("#weatherIcon");
 var savedSearches = document.querySelector("#saved-searches");
 var searchButton = document.querySelector("#searchButton");
 var searchForm = document.querySelector("#searchForm");
-// var inputCityName = document.querySelector("#inputCityName");
+var inputCityName = document.querySelector("#inputCityName");
 
 function init() {
   var citySearches = [];
@@ -64,7 +64,6 @@ function init() {
 
   // Get the current weather for the requested city
   function getCityWeather(cityName) {
-    var inputCityName = document.querySelector("#inputCityName").value;
     if (!citySearches.includes(inputCityName)) {
       citySearches.push(inputCityName);
       localStorage.setItem("Cities Searched", citySearches);
@@ -73,7 +72,6 @@ function init() {
       console.error("Nothing was entered. Please type the name of a city.");
       return;
     }
-    cityName = inputCityName;
     var weatherByCityURL =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
       cityName +
@@ -193,8 +191,8 @@ function init() {
           ".png";
       });
   }
-  // formSubmit();
 
+  // Create elements for 5 day forecase
   for (let i = 0; i < 5; i++) {
     var fiveDaySection = document.querySelector("#fiveDaySection");
     var createDay = document.createElement("div");
@@ -230,7 +228,7 @@ function init() {
     selectDay.append(addHumidityElement);
     addHumidityElement.textContent = "Humidity: ";
   }
-
+  // Submit the form that contains the text from "Enter city name here"
   function formSubmit(event) {
     event.preventDefault();
     var city = inputCityName.value;
@@ -238,6 +236,7 @@ function init() {
     getCityWeather(city);
   }
 
+  // 
   function handleButtonClick(event) {
     var target = event.target;
     var city = target.getAttribute("data-city");
