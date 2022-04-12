@@ -12,7 +12,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-<link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css" />
     <title>Weather Dashboard</title>
   </head>
   <body>
@@ -20,23 +20,30 @@
       class="container-fluid justify-content-center bg-secondary text-white"
     >
       <h1 class="text-center">Weather Dashboard</h1>
-
     </header>
 
     <main>
-      <aside class="col-2 margin">
+      <aside class="col-2 margin10">
         <div class="input-group mb-3">
-            <form id="searchForm">
-              <input id="inputCityName" type="text" placeholder="Enter city name here"class="col-12 form-control"/>
-              <button id="searchButton" class="btn btn-primary col-12">Search</button>
-            </form>
-          <div id="savedSearches"></div>
+          <form id="searchForm">
+            <input
+              id="inputCityName"
+              type="text"
+              placeholder="Enter city name here"
+              class="col-12 form-control"
+            />
+            <button id="searchButton" class="btn btn-primary col-12">
+              Search
+            </button>
+          </form>
+        </div>
+        <div id="saved-searches"></div>
       </aside>
-      <section class="col-10 margin">
-        <section class="border-bottom border-dark border-5">
+      <section class="col-10 margin10">
+        <section class="border-bottom border-dark border-5 bg-grey">
           <h2 id="current-city" class="mx-auto"></h2>
           <h4 id="todaysDate"></h4>
-          <img id="weatherIcon" alt="Weather icon">
+          <img id="weatherIcon"/>
           <h4 id="temperature"></h4>
           <h4 id="timezone"></h4>
           <h4 id="humidity"></h4>
@@ -45,9 +52,7 @@
         </section>
         <section>
           <h2>5 Day Forecast</h2>
-          <section id="fiveDaySection" class="row-section">
-
-          </section>
+          <section id="fiveDaySection" class="row-section"></section>
         </section>
       </section>
     </main>
@@ -59,7 +64,7 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-    <script src="/assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
     <!-- <script src="/assets/js/scratchFile.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
