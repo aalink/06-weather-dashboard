@@ -31,8 +31,16 @@ p {
     background-color: grey;
 }
 
-.margin {
+.margin10 {
     margin: 10px;
+}
+
+.margin5 {
+    margin: 5px;
+}
+
+.bg-grey {
+    background-color: rgb(182, 182, 182);
 }
 
 .uvIndexLow {
